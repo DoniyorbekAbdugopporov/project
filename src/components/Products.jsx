@@ -3,14 +3,12 @@ import React from "react";
 import { FaRegHeart, FaTrashAlt } from "react-icons/fa";
 
 const Products = ({ data, isAdmin }) => {
-  // Delete handler
   const handleDelete = async (id) => {
     const confirmDelete = confirm("Are you sure?");
     if (confirmDelete) {
       try {
         await request.delete(`/product/delete/${id}`);
         alert("Product deleted successfully");
-        // Here, you might want to refresh the product list or update the state.
       } catch (error) {
         console.error("Error deleting product:", error);
         alert("Failed to delete the product.");
@@ -25,18 +23,15 @@ const Products = ({ data, isAdmin }) => {
           key={product.id}
           className="w-80 p-4 border rounded shadow-sm hover:shadow-lg transition-shadow"
         >
-          {/* Product Image */}
           <img
             src={product.image}
             alt={product.name}
             className="w-full h-60 object-cover rounded"
           />
 
-          {/* Product Info */}
           <h3 className="text-lg font-semibold mt-3">{product.name}</h3>
           <p className="text-gray-700">{product.price} USD</p>
 
-          {/* Admin or User Actions */}
           <div className="mt-4 flex justify-end">
             {isAdmin ? (
               <button
